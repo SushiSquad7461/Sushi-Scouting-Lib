@@ -1,0 +1,1 @@
+const int MIN_TIMESTAMP_DIFFERENCE = 1000; // In milliseconds
