@@ -48,8 +48,10 @@ class Data<ValueType> {
 
   // Gets the current value as a string
   String get() {
-    return (currValue is double || currValue is double)
+    return (currValue is double)
         ? (currValue as double).toString()
+        : (currValue is bool) 
+        ? (currValue as bool).toString()
         : (currValue as String);
   }
 
@@ -57,7 +59,9 @@ class Data<ValueType> {
     setByUser = false;
     timestamps = {};
     (currValue is double)
-        ? (currValue = 0.0 as ValueType)
+        ? (currValue = -1.0 as ValueType)
+        : (currValue is bool)
+        ? (currValue = false as ValueType) 
         : (currValue = '' as ValueType);
   }
 
@@ -75,7 +79,6 @@ class Data<ValueType> {
       if (diffBetweenLast!.abs() > MIN_TIMESTAMP_DIFFERENCE) {
         timestamps[diffBetweenInitial!] = currValue;
         lastTime = DateTime.now();
-        print("CHANGE");
       }
     }
   }

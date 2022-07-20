@@ -49,7 +49,9 @@ class Section {
           values: i["values"] == null ? null : List<String>.from(i["values"])));
 
       if (i["type"] == "number") {
-        values.add(Data<double>(0));
+        values.add(Data<double>(-1));
+      } else if (i['type'] == 'bool') {
+        values.add(Data<bool>(false));  
       } else if (i["type"] == "string") {
         values.add(Data<String>(""));
       } else {
@@ -108,11 +110,7 @@ class Section {
 
   void empty() {
     for (int i = 0; i < values.length; ++i) {
-      if (components[i].values == null) {
-        values[i].empty();
-      } else {
-        values[i].set(components[i].values![0]);
-      }
+      values[i].empty();
     }
   }
 }
@@ -163,6 +161,26 @@ class Page {
       }
     }
     return ret;
+  }
+
+  List<Data> getValues() {
+    List<Data> data = [];
+    for ( Section s in sections) {
+      for ( Data d in s.values) {
+        data.add(d);
+      }
+    }
+    return data;
+  }
+
+  List<Component> getComponents() {
+    List<Component> components = [];
+    for ( Section s in sections) {
+      for ( Component c in s.components) {
+        components.add(c);
+      }
+    }
+    return components;
   }
 }
 
@@ -227,4 +245,25 @@ class ScoutingData {
       pages[page]!.empty();
     }
   }
+
+  List<Data> getData() {
+    List<Data> data = [];
+    for (Page p in pages.values) {
+      for( Data d in p.getValues()) {
+        data.add(d);
+      }
+    }
+    return data;
+  }
+
+    List<Component> getComponents() {
+    List<Component> components = [];
+    for ( Page p in pages.values) {
+      for (  Component c in p.getComponents()) {
+        components.add(c);
+      }
+    }
+    return components;
+  }
 }
+
