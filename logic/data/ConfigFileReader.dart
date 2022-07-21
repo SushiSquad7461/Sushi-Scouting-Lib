@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
+import 'package:sushi_scouts/src/logic/Constants.dart';
 import 'ScoutingData.dart';
 
 class ConfigFileReader {
@@ -8,8 +9,11 @@ class ConfigFileReader {
   int year;
   int? teamNum;
   Map<String, dynamic>? parsedFile;
+  static final ConfigFileReader _reader = ConfigFileReader._(CONFIG_FILE_PATH, 2022);
 
-  ConfigFileReader(this.configFileFolder, this.year);
+  ConfigFileReader._(this.configFileFolder, this.year);
+
+  static ConfigFileReader get instance => _reader;
 
   Future<void> readConfig() async {
     try {

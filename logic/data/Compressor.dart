@@ -10,12 +10,14 @@ class Compressor{
 
   Compressor(this.data, this.screen);
 
-  String compress() {
+  static String setBackUp(String compressedData) {
+    return String.fromCharCode(compressedData.runes.toList()[0] | 1) + compressedData.substring(1);
+  }
+
+  void encode() {
     addInt(screen, 4);
-    List<String> datum = [];
 
     for( Data d in data) {
-      datum.add(d.get());
       if(d.currValue is bool) {
         addNum(d.currValue as bool ? 1 : 0);
       } else if(d.currValue is double) {
@@ -24,12 +26,60 @@ class Compressor{
         addString(d.get());
       }
     }
-    
+  }
+
+  String getCompressedString() {
     List<int> compressed = List.filled((partial.length/16).floor()+1, 0);
     for(int i = 0; i<partial.length; i++) {
       compressed[(i/16).floor()] = compressed[(i/16).floor()] | (partial[i] ? 1 : 0)<<(i%16);
     }
     return String.fromCharCodes(compressed);
+  }
+
+  String firstCompress() {
+    partial.add(false);
+    encode();
+    return getCompressedString();
+  }
+
+  String addTo(String prev, int length) {
+    int rune = prev.runes.toList()[prev.length-1];
+    for (int i = 0; i<(length%16); i++) {
+      partial.add(rune & (1<<i) != 0);
+    }
+    encode();
+    String additional = getCompressedString();
+    return prev.substring(0, prev.length-1) + additional;
+  }
+
+  static String update(String prev, int length, String newContent) {
+    final List<bool> partial = [];
+    int rune = prev.runes.toList()[prev.length-1];
+    bool firstItem = true;
+
+    for (int i = 0; i<(length%16); i++) {
+      partial.add(rune & (1<<i) != 0);
+    }
+    for (int rune in newContent.runes) {
+      int index = 1;
+      for (int i = 0; i<16; i++) {
+        if(firstItem) {
+          firstItem = false;
+        } else {
+          partial.add(rune & index != 0);
+          index *= 2;
+        } 
+      }
+    }
+    List<int> compressed = List.filled((partial.length/16).floor()+1, 0);
+    for(int i = 0; i<partial.length; i++) {
+      compressed[(i/16).floor()] = compressed[(i/16).floor()] | (partial[i] ? 1 : 0)<<(i%16);
+    }
+    return prev.substring(0, prev.length-1) + String.fromCharCodes(compressed);
+  }
+
+  int getLength() {
+    return partial.length;
   }
 
   void addNum(int i) {

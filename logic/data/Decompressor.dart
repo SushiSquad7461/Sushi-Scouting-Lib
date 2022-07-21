@@ -20,15 +20,23 @@ class Decompressor {
     }
   }
 
+  //call isBackup on the first decompressed only true means it is a backup
+  bool isBackup() {
+    return partial.removeAt(0);
+  }
+
+  //must call getScreen everytime before you call decompress
   String getScreen() {
     screenGotten = true;
     return screens[getInt(4)];
   }
 
-  void decompress(List<Data> data) {
+  //returns true if there is more data
+  bool decompress(List<Data> data) {
     if(!screenGotten) {
       throw("get screen first");
     }
+    screenGotten = false;
     for( int index = 0; index < data.length; index++) {
       if (partial[0] && partial[1]) {
         data[index].set(getString());
@@ -40,6 +48,7 @@ class Decompressor {
         }
       }
     }
+    return partial.length>=16;
   }
 
   int getNum() {
