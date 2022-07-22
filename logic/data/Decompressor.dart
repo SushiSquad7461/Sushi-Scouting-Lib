@@ -18,6 +18,7 @@ class Decompressor {
         index *= 2;
       }
     }
+    print(partial);
   }
 
   //call isBackup on the first decompressed only true means it is a backup
@@ -48,6 +49,7 @@ class Decompressor {
         }
       }
     }
+    print(partial.length);
     return partial.length>=16;
   }
 
