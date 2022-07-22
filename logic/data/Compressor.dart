@@ -54,28 +54,29 @@ class Compressor{
 
   static String update(String prev, int length, String newContent) {
     final List<bool> partial = [];
-    int rune = prev.runes.toList()[prev.length-1];
+    int lastRune = prev.runes.toList()[prev.length-1];
     bool firstItem = true;
 
     for (int i = 0; i<(length%16); i++) {
-      partial.add(rune & (1<<i) != 0);
+      partial.add(lastRune & (1<<i) != 0);
     }
+    List<bool> temp = [];
     for (int rune in newContent.runes) {
-      int index = 1;
       for (int i = 0; i<16; i++) {
         if(firstItem) {
-          firstItem = false;
+           firstItem = false;
         } else {
-          partial.add(rune & index != 0);
-          index *= 2;
+          temp.add(rune & (1<<i) != 0);
+          partial.add(rune & (1<<i) != 0);
         } 
       }
     }
+    print(temp);
     List<int> compressed = List.filled((partial.length/16).floor()+1, 0);
     for(int i = 0; i<partial.length; i++) {
       compressed[(i/16).floor()] = compressed[(i/16).floor()] | (partial[i] ? 1 : 0)<<(i%16);
     }
-    return prev.substring(0, prev.length-1) + String.fromCharCodes(compressed);
+    return prev.substring(0, prev.length-1) + String.fromCharCodes(compressed).substring(0, compressed.length);
   }
 
   int getLength() {
