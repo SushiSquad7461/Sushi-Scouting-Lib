@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
-import 'package:sushi_scouts/src/logic/Constants.dart';
-import 'ScoutingData.dart';
+import 'package:sushi_scouts/src/logic/constants.dart';
+import 'scouting_data.dart';
 
 class ConfigFileReader {
   String configFileFolder;

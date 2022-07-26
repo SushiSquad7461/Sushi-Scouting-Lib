@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:sushi_scouts/SushiScoutingLib/logic/data/Data.dart';
+import 'package:sushi_scouts/SushiScoutingLib/logic/data/data.dart';
 
 class Compressor{
   final List<Data> data;

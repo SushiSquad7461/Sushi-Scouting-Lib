@@ -5,8 +5,8 @@ import 'package:get/get.dart';
 import 'dart:convert';
 import 'package:crypto/crypto.dart';
 
-import '../color/HexColor.dart';
-import 'Data.dart';
+import '../color/hex_color.dart';
+import 'data.dart';
 
 class Component {
   String name;

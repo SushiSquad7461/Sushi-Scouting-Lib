@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:sushi_scouts/SushiScoutingLib/logic/data/Data.dart';
+import 'package:sushi_scouts/SushiScoutingLib/logic/data/data.dart';
 
 
 class Decompressor {
