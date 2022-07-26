@@ -2,6 +2,8 @@
   The Data classes purpose is to store the current value of a component.
   It currently supports strings and numbers.
 */
+import 'package:sushi_scouts/SushiScoutingLib/logic/models/scouting_data_models/component.dart';
+
 import '../Constants.dart';
 
 class Data<ValueType> {
@@ -11,6 +13,15 @@ class Data<ValueType> {
   DateTime? initialTime;
   DateTime? lastTime;
   bool setByUser;
+
+  static Data fromComponent(Component component) {
+    if( component.type == "bool") {
+      return Data<bool>(false);
+    } else if (component.type == "number") {
+      return Data<double>(-1.0);
+    }
+    return Data<String>("");
+  }
 
   Data(this.currValue, {this.setByUser = false});
 

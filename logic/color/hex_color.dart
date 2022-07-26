@@ -9,5 +9,9 @@ class HexColor extends Color {
     return int.parse(hexColor, radix: 16);
   }
 
+  static HexColor fromString(Map<dynamic, dynamic> json, String key) {
+    return HexColor(json[key]);
+  }
+
   HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
 }
