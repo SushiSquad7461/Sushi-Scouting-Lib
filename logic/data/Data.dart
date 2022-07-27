@@ -2,9 +2,8 @@
   The Data classes purpose is to store the current value of a component.
   It currently supports strings and numbers.
 */
-import 'package:sushi_scouts/SushiScoutingLib/logic/models/scouting_data_models/component.dart';
-
 import '../Constants.dart';
+import '../models/scouting_data_models/component.dart';
 
 class Data<ValueType> {
   // Current value of the component

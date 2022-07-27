@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:sushi_scouts/SushiScoutingLib/logic/color/hex_color.dart';
-import 'package:sushi_scouts/SushiScoutingLib/logic/data/data.dart';
 
+import '../../color/hex_color.dart';
+import '../../data/Data.dart';
 import 'component.dart';
 
 class Section {
