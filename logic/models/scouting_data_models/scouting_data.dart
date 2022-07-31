@@ -1,6 +1,6 @@
-import 'package:sushi_scouts/SushiScoutingLib/logic/data/data.dart';
-import 'package:sushi_scouts/SushiScoutingLib/logic/models/scouting_data_models/component.dart';
-import 'package:sushi_scouts/SushiScoutingLib/logic/models/scouting_data_models/page.dart';
+import '../../data/Data.dart';
+import 'component.dart';
+import 'page.dart';
 
 class ScoutingData {
   String name;
