@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:sushi_scouts/SushiScoutingLib/logic/network/rest_client.dart';
 import 'package:sushi_scouts/SushiScoutingLib/logic/secret/secret.dart';
 import 'package:sushi_scouts/SushiScoutingLib/logic/secret/secret_loader.dart';
-import 'package:sushi_scouts/SushiScoutingLib/logic/models/scouting_data_models/match_schedule.dart';
+import 'package:sushi_scouts/SushiScoutingLib/logic/models/match_schedule.dart';
 
 
 class ApiRepository {

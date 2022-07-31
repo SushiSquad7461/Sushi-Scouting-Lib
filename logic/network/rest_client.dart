@@ -1,6 +1,6 @@
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
-import 'package:sushi_scouts/SushiScoutingLib/logic/models/scouting_data_models/match_schedule.dart';
+import 'package:sushi_scouts/SushiScoutingLib/logic/models/match_schedule.dart';
 
 part 'rest_client.g.dart';
 
